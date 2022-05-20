@@ -1,0 +1,10 @@
+{
+  "name": "node-generate-code",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  }
+}
