@@ -52,28 +52,40 @@ const createFolderByData = (data, dir) => {
 //   }
 // });
 
-const createFileJson = async (dir, jsonData = []) => {
-  await fs.readdirSync(dir, (err, files) => {
-    files.forEach(async file => {
-      const isDirectory = await fs.lstatSync(path.join(dir, file)).isDirectory();
-      console.log(file, '---', isDirectory);
-      if (isDirectory) {
-        jsonData.push({
-          type: 'folder',
-          name: file
-        });
-      } else {
-        jsonData.push({
-          type: 'file',
-          name: file
-        });
-      }
-    });
+const createFileJson = (dir, jsonData) => {
+  const files = fs.readdirSync(dir, err => {});
+
+  files.forEach(file => {
+    const isDirectory = fs.lstatSync(path.join(dir, file)).isDirectory();
+    console.log(file, '---', isDirectory);
+    if (isDirectory) {
+      jsonData.children.push({
+        type: 'folder',
+        name: file
+      });
+    } else {
+      const content = fs.readFileSync(path.join(dir, file), 'utf-8');
+
+      jsonData.children.push({
+        type: 'file',
+        name: file,
+        content
+      });
+    }
   });
-  return jsonData;
+
+  console.log('files: ', files);
 };
 
-const jsonData = await createFileJson('./_template');
+let arr = [
+  {
+    type: 'folder',
+    name: '_template',
+    children: []
+  }
+];
 
-console.log('jsonData: ', jsonData);
+createFileJson('./vue3-antd-code', arr[0]);
+
+fs.writeFileSync('./arr.js', 'export default ' + JSON.stringify(arr));
 
