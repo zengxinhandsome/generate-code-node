@@ -5,6 +5,8 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "create:tmp": "node createTemplate.js"
   }
 }
+
