@@ -5,11 +5,10 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "start": "node index.js",
-    "create:tmp": "node createTemplate.js"
+    "start": "node index.js"
   },
   "bin": {
-    "create:tmp": "bin/index.js"
+    "create-antd-tmp": "./bin/index.js"
   }
 }
 
